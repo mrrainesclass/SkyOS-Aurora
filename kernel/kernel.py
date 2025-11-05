@@ -18,6 +18,7 @@ import urllib.request
 # Of course, each file has to fall back to the main file, which will have to fall back to the kernel.
 # I might make a guide for how to make a SkyOS Aurora 1.2+ app, but for now, you can just follow the current sturcture, then add mutltiple files in the folder you run it from.
 # Installers and stuff will soon be suported.
+# okay well i am now doing this as a class project so i guess i have motivation now, uhhh lets go!
 
 valid_version = "1.1.09s2725"
 
@@ -69,6 +70,9 @@ this_dir = os.path.dirname(os.path.abspath(__file__))
 
 root_path = os.path.abspath(os.path.join(this_dir, '..'))  # Go up two levels to get the root directory
 
+RED = "\033[31m"
+RESET = "\033[0m"
+
 # User files at root
 username_file = os.path.join(root_path, "username.txt")
 password_file = os.path.join(root_path, "password.txt")
@@ -95,6 +99,7 @@ path_location = os.path.join(root_path, 'path.txt')
 open(path_location, 'w').close()  # Clear the file first
 for app in os.listdir(apps_dir):
     with open(path_location, 'a') as path_file:
+        # now avoids writing folders for multi file apps, and writes only 1fileapps and launchers.
         path_file.write(f"{os.path.join(apps_dir, app)}\n")
 
 def run_setup():
@@ -276,6 +281,7 @@ while True:
 
     elif command == "echo":
         print()
+
     elif "echo" in command:
         echo_text = command.replace("echo ", "").strip()
         if echo_text:
@@ -437,9 +443,12 @@ while True:
     elif command == "license":
         print("SkyOS is licensed under the BSD 3-Clause license.\n"
               "You are free to use, modify, and distribute this software as long as you include the original license text.\n"
-              "For more details, please refer to the LICENSE file in the root directory.")
+              "For more details, please refer to the LICENSE file in the root dire ctory.")
+
+    elif command == "":
+        pass
 
     else:
-        print(command + " is not a valid command or executable. Type 'help' for a list of commands.")
+        print(f"{RED}{command} is not a valid command or executable. Type 'help' for a list of commands.{RESET}")
 
 panic("NON-NORMAL SHUTDOWN! EMERGENCY!")  # in case the loop somehow breaks
