@@ -15,7 +15,7 @@ def find_file_in_folder(folder_path, file_name):
     return None
 
 # Base URL for installation assets
-installurl = "https://raw.githubusercontent.com/mrrainesclass/SkyOS-assets/patch-1"
+installurl = "https://raw.githubusercontent.com/Alter-Net-codes/SkyOS-assets/main"
 
 # Download package list if missing
 if not os.path.isfile("apps.txt"):
@@ -111,4 +111,5 @@ except requests.exceptions.RequestException as e:
     sys.exit(1)
 except Exception as e:
     print(f"{RED}An error occurred: {e}{RESET}")
+
     sys.exit(1)
